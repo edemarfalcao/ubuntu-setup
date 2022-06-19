@@ -6,7 +6,9 @@ Após configurar a sua chave SSH e ter Personal Acess Token, adicione os arquivo
 Nesta etapa serão instaladas as seguintes ferramentas 
 
 ZSH
+
 PowerLevel10k
+
 ASDF
 
 ## install-utils
