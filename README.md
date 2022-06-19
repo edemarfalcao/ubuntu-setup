@@ -1,5 +1,5 @@
 # Ubuntu Setup 
-Após configurar a sua chave SSH e ter Personal Acess Token, rode os scripts na sequencia indicada
+Após configurar a sua chave SSH e ter Personal Acess Token, adicione os arquivos na sua pasta home e rode os scripts na sequencia indicada
 
 ## config-wsl
 
