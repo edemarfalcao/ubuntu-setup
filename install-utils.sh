@@ -71,3 +71,8 @@ if [ "$installPostgres" == "y" ]; then
     createuser -s postgres
     psql -U postgres -c "ALTER USER postgres WITH PASSWORD 'postgres';"
 fi
+
+read -p "Do you want to install Redis? [y/n]: " installRedis
+if [ "$installRedis" == "y" ]; then
+    sudo apt install redis-server -y
+fi
