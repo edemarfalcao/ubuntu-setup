@@ -2,7 +2,9 @@
 Após configurar a sua chave SSH e ter Personal Acess Token e rode os scripts na sequencia indicada, não esqueça de adicionar permissão de escrita para os scripts  
 
 > sudo chmod +x fetch-repos.sh
+> 
 > sudo chmod +x install-utils.sh
+> 
 > sudo chmod +x config-wsl.sh
 
 ## config-wsl
