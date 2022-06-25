@@ -10,7 +10,7 @@
  }
 
  install_dependencies() {
-     sudo apt install autoconf bison build-essential libssl-dev libyaml-dev libreadline-dev zlib1g-dev libncurses-dev libffi-dev libgdbm-dev gcc g++ make libpq-dev -y
+     sudo apt install autoconf bison build-essential libssl-dev libyaml-dev libreadline-dev zlib1g-dev libncurses-dev libffi-dev libgdbm-dev gcc g++ make libpq-dev build-essential libmysqlclient-dev -y
  }
 
  install_dependencies
@@ -22,11 +22,13 @@
          if [ "$language" == "ruby" ]; then
              asdf_install "$language"
              gem install bundler
-             gem install
+             gem install rails
+             gem install pg
          fi
 
          if [ "$language" == "node" ]; then
              asdf_install "$language"
+             echo "Installing yarn"
              npm install yarn -g
          fi
 
@@ -54,8 +56,10 @@ read -p "Do you want to install LunarVim? [y/n]: " LunarVim
 if [ "$LunarVim" == "y" ]; then
     sudo apt install -y ./nvim-linux64.deb
     bash <(sudo curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
-    export PATH=~/.local/bin:$PATH
+
     echo "Installed LunarVim successfully"
+    echo -e "\n export PATH=~/.local/bin:$PATH" >>~/.zshrc
+   
 
 fi
 
@@ -79,3 +83,11 @@ if [ "$installPostgres" == "y" ]; then
     psql -U postgres -c "ALTER USER postgres WITH PASSWORD 'postgres';"
     exit
 fi
+
+read -p "Do you want to install MariaDB?" [y/n] installMariaDB
+if ["$installMariaDB" == "y"]; then
+  echo "If you get an error when trying to enter password, just run :"
+  echo "sudo service mysql start"
+  sudo apt install mariadb-server
+  sudo mysql_secure_installation
+fi 
