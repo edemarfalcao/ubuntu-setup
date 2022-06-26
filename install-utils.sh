@@ -82,6 +82,9 @@ if [ "$installPostgres" == "y" ]; then
     createuser -s postgres
     psql -U postgres -c "ALTER USER postgres WITH PASSWORD 'postgres';"
     exit
+
+elif [ "$installPostgres" == "n" ]; then
+    echo "You will need to install postgresql manually"
 fi
 
 read -p "Do you want to install MariaDB?" [y/n] installMariaDB
