@@ -21,6 +21,8 @@
      if [ "$answer" == "y" ] || [ "$answer" == "Y" ]; then
          if [ "$language" == "ruby" ]; then
              asdf_install "$language"
+             asdf install ruby 2.4.10 
+             asdf install ruby 2.6.4 
              gem install bundler
              gem install rails
              gem install pg
