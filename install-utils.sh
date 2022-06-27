@@ -85,7 +85,7 @@ elif [ "$installPostgres" == "n" ]; then
     echo "You will need to install postgresql manually"
 fi
 
-read -p "Do you want to install MariaDB?" [y/n] installMariaDB
+read -p "Do you want to install MariaDB? [y/n]:" installMariaDB
 if ["$installMariaDB" == "y"]; then
   echo "If you get an error when trying to enter password, just run :"
   echo "sudo service mysql start"
