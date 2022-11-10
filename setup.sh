@@ -1,34 +1,34 @@
 #!/bin/bash
 
+# This script is meant to be run on a fresh install of Ubuntu 20.04
+
 if [ -x "$(command -v zsh)" ]; then
-
+    
     ## if asdf is not installed, install it
-
+    
     if [ ! -d ~/.asdf ]; then
         git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.0
         echo -e "\n. $HOME/.asdf/asdf.sh" >>~/.zshrc
         echo -e "\n. $HOME/.asdf/completions/asdf.bash" >>~/.zshrc
-
+        
     fi
-
+    
     if [ ! -d ~/powerlevel10k ]; then
         git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
         echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
-
+        
     fi
-
-    cd ~ && echo 'cd ~' >>.zshrc
-
+    
     sed -i 's/=(git)/=(git asdf)/g' .zshrc
 else
     sudo apt update
     sudo apt upgrade -y
     sudo apt autoremove -y
     sudo apt-get install -y zsh
-
+    
     chsh -s "$(which zsh)" -y
     sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" -y
-
+    
 fi
 
 read -r -p "Wich languages do you want to install? (separate by comma): " languages
@@ -56,16 +56,16 @@ for language in $languages; do
             gem install rails
             gem install pg
         fi
-
+        
         if [ "$language" == "node" ]; then
             asdf_install "$language"
             asdf install nodejs lts
             asdf global nodejs lts
             echo "Installing yarn"
             npm install yarn -g
-
+            
         fi
-
+        
         if [ "$language" == "python" ]; then
             asdf_install "$language"
             pip install --upgrade pip
@@ -73,15 +73,15 @@ for language in $languages; do
             pip install --upgrade wheel
             pip install --upgrade virtualenv
         fi
-
+        
         if [ "$language" == "rust" ]; then
             asdf_install "$language"
             cargo install cargo-install
         fi
     fi
-
+    
     echo "Installing $language dependencies"
-
+    
 done
 
 echo "Installed $languages successfully"
@@ -90,10 +90,10 @@ read -r -p "Do you want to install LunarVim? [y/n]: " LunarVim
 if [ "$LunarVim" == "y" ]; then
     sudo apt install -y ./nvim-linux64.deb
     bash <(sudo curl -s https://raw.githubusercontent.com/lunarvim/lunarvim/master/utils/installer/install.sh)
-
+    
     echo "Installed LunarVim successfully"
     echo -e "\n export PATH=~/.local/bin:$PATH" >>~/.zshrc
-
+    
 fi
 
 read -r -p "Do you want to fetch the repositories? [y/n]: " fetchRepos
@@ -102,22 +102,22 @@ if [ "$fetchRepos" == "y" ]; then
     echo "You chose $choice"
     echo "Please enter your Personal Acces Token:"
     read -r token
-
+    
     echo "Now enter your company name:"
     read -r org
     mkdir ~/"$org"
-
+    
     cd ~/"$org" || exit
-
+    
     if [ "$choice" == "gitlab" ]; then
         curl -i -H "PRIVATE-TOKEN: glpat-gLF3xjbTBo3LQEAx31uz" https://gitlab.com/api/v4/groups/"${org}" | grep -o 'git@[^"]*' | xargs -I {} git clone {}
-
-    elif [ "$choice" == "github" ]; then
+        
+        elif [ "$choice" == "github" ]; then
         curl -i -H "Authorization: token $token" https://api.github.com/orgs/"${org}"/repos | grep -o 'git@[^"]*' | xargs -I {} git clone {}
     else
         echo "For now, only gitlab and github are supported"
     fi
-
+    
 fi
 
 read -r -p "Do you want to install Redis? [y/n]: " installRedis
@@ -133,7 +133,7 @@ if [ "$installPostgres" == "y" ]; then
     sudo -i -u postgres
     createuser -s postgres
     psql -U postgres -c "ALTER USER postgres WITH PASSWORD 'postgres';"
-elif [ "$installPostgres" == "n" ]; then
+    elif [ "$installPostgres" == "n" ]; then
     echo "You will need to install postgresql manually"
 fi
 
