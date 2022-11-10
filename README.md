@@ -1,29 +1,26 @@
 # Ubuntu Setup 
-Após configurar a sua chave SSH e ter Personal Acess Token e rode os scripts na sequencia indicada, não esqueça de adicionar permissão de escrita para os scripts  
+Após configurar a sua chave SSH e ter Personal Acess Token, rode o script, não esqueça de adicionar permissão de escrita para os scripts  
 
-> sudo chmod +x fetch-repos.sh
-> 
-> sudo chmod +x install-utils.sh
-> 
-> sudo chmod +x config-wsl.sh
+> sudo chmod +x setup.sh
 
-## config-wsl
 
-Nesta etapa serão instaladas as seguintes ferramentas 
+>./setup.sh
 
 ZSH
+
+Roder mais uma vez 
+
+>./setup.sh
 
 PowerLevel10k
 
 ASDF
 
-## install-utils
+E mais uma vez para instalar as linguagens, bancos de dados e baixar repositórios 
 
-Nesse momento o script irá instalar dependencias nescessárias, linguagens de programação selecionadas, LunarVim e Postgres. Além disso se desejado ele irá rodar o script de fetch-repositories
+>./setup.sh
 
-## fetch-repos
 
-Este por sua vez, dada a chave de acesso pessoal e o nome da organização, cria uma pasta respectiva e faz clone de todos repositorios daquela organização no github
 
 
 
